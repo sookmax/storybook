@@ -120,7 +120,7 @@ export const install: Task['run'] = async (
   logger.info(`🔢 Adding package scripts:`);
 
   const nodeOptions = [
-    ...(process.env.NODE_OPTIONS || '').split(' '),
+    process.env.NODE_OPTIONS || '',
     '--preserve-symlinks',
     '--preserve-symlinks-main',
   ].filter(Boolean);
@@ -131,7 +131,7 @@ export const install: Task['run'] = async (
   }
 
   const nodeOptionsString = nodeOptions.join(' ');
-  const prefix = `NODE_OPTIONS="${nodeOptionsString}" STORYBOOK_TELEMETRY_URL="http://localhost:6007/event-log"`;
+  const prefix = `NODE_OPTIONS='${nodeOptionsString}' STORYBOOK_TELEMETRY_URL="http://localhost:6007/event-log"`;
 
   await updatePackageScripts({
     cwd,
